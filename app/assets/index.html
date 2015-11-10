@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Introduction to Javascript Task Runners</title>
+    
+    <link href="stylesheets/app.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+
+        <section id="Intro" class="slide01">
+          <h2>Introduction To</h2>
+          <h2>Javascript Task Runners</h2>
+          <h4>Chi-chi Wang</h4>
+          <div class="row">
+            <img class="fragment" src="images/enova_logo.png">
+            <img class="fragment" src="images/ea_logo.png">
+            <img class="fragment" src="images/ignition_logo.jpg">
+          </div>
+        </section>
+
+        <section id="Tasks" class="slide02">
+          <h2>Repetitive Tasks In Front-End Development</h2>
+          <div class="list">
+            <ul>
+              <li>Complile (Coffeescript, Babel, Sass, Less, etc.)</li>
+              <li>Auto-prefix</li>
+              <li>Minify</li>
+              <li>Concatenate</li>
+              <li>Bundle Modules</li>
+              <li>Lint</li>
+              <li>Run Tests</li>
+              <li>Build Sprites</li>
+              <li>Optimize Images</li>
+              <li>Live Reload</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="TaskRunners" class="slide03" data-transition="convex-in fade-out">
+          <h2>Task Runners Automate Repetitive Tasks</h2>
+          <div class="row fragment">
+            <img src="images/grunt_logo.png">
+            <img src="images/brunch_logo.png">
+            <img src="images/gulp_logo.png">
+          </div>
+        </section>
+
+        <section id="Grunt-intro" class="slide04" data-transition="fade-in slide-out">
+          <img src="images/grunt_logo.png">
+          <h2>Central Philosophy:</h2>
+          <h2>Configurability</h2>
+        </section>
+
+        <section id="Grunt-strengths" class="slide05" data-transition="slide">
+          <h2>Grunt Pros:</h2>
+          <div class="list">
+            <ul>
+              <li>Large Community</li>
+              <li class="fragment">Over 4,000 Plugins</li>
+              <li class="fragment">Highly configurable</li>
+              <li class="fragment">Tasks can be saved as plugins to reuse/share</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Grunt-weaknesses" class="slide06" data-transition="slide">
+          <h2>Grunt Cons:</h2>
+          <div class="list">
+            <ul>
+              <li>Large, Bloated Configuration Files</li>
+              <li class="fragment">You Will Be Reading/Writing Configurations A Lot</li>
+              <li class="fragment">Slow Build Times</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Grunt-sampleconfig" class="slide07" data-transition="slide-in fade-out">
+          <h2>Sample Gruntfile:</h2>
+          <div class="codeblock01">
+            <pre>
+              <code class="line-numbers" data-trim>
+// Generated on 2013-10-31 using generator-webapp 0.4.3
+'use strict';
+
+module.exports = function (grunt) {
+    // show elapsed time at the end
+    require('time-grunt')(grunt);
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
+
+    grunt.initConfig({
+        // configurable paths
+        yeoman: {
+            app: 'app',
+            dist: 'dist'
+        },
+        watch: {
+            compass: {
+                files: ['<%= yeoman.app %>/sass/{,*/}*.{scss,sass}'],
+                tasks: ['compass:server', 'autoprefixer']
+            },
+            partials: {
+                files: ['<%= yeoman.app %>/partials/sass/*.{scss,sass}'],
+                tasks: ['compass:partials', 'autoprefixer']
+            },
+            styles: {
+                files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+                tasks: ['copy:styles', 'autoprefixer']
+            },
+            vendor: {
+                files: ['<%= yeoman.app %>/scripts/vendor/*.js', '<%= yeoman.app %>/scripts/utility/*.js'],
+                tasks: ['concat:server']
+            },
+            livereload: {
+                options: {
+                    livereload: '<%= connect.options.livereload %>'
+                },
+                files: [
+                    '<%= yeoman.app %>/*.html',
+                    '<%= yeoman.app %>/partials/{,*/}*.*',
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                    '<%= yeoman.app %>/audio/*.*'
+                ]
+            }
+        },
+        connect: {
+            options: {
+                port: 9000,
+                livereload: 35729,
+                // change this to '0.0.0.0' to access the server from outside
+                hostname: 'localhost'
+            },
+            livereload: {
+                options: {
+                    open: true,
+                    base: [
+                        '.tmp',
+                        '<%= yeoman.app %>'
+                    ]
+                }
+            },
+            test: {
+                options: {
+                    base: [
+                        '.tmp',
+                        'test',
+                        '<%= yeoman.app %>'
+                    ]
+                }
+            },
+            dist: {
+                options: {
+                    open: true,
+                    base: '<%= yeoman.dist %>'
+                }
+            }
+        },
+        uglify: {
+            dist: {
+                options: {
+                    mangle: true
+                },
+                files: {
+                    '<%= yeoman.dist %>/scripts/shims.min.js' : '<%= yeoman.app %>/scripts/shims.min.js',
+                    '<%= yeoman.dist %>/scripts/vendors.min.js' : '<%= yeoman.app %>/scripts/vendors.min.js',
+                    '<%= yeoman.dist %>/scripts/app.js' : '<%= yeoman.app %>/scripts/app.js',
+                    '<%= yeoman.dist %>/scripts/control.js' : '<%= yeoman.app %>/scripts/control.js',
+                    '<%= yeoman.dist %>/scripts/main.js' : '<%= yeoman.app %>/scripts/main.js',
+                    '<%= yeoman.dist %>/scripts/mobile.js' : '<%= yeoman.app %>/scripts/mobile.js',
+                    '<%= yeoman.dist %>/scripts/share.js' : '<%= yeoman.app %>/scripts/share.js',
+                    '<%= yeoman.dist %>/scripts/track.js' : '<%= yeoman.app %>/scripts/track.js',
+                    '<%= yeoman.dist %>/scripts/classes/bb.class.interactiveSlideShow.js' : '<%= yeoman.app %>/scripts/classes/bb.class.interactiveSlideShow.js',
+                    '<%= yeoman.dist %>/scripts/classes/bb.class.interactiveVideo.js' : '<%= yeoman.app %>/scripts/classes/bb.class.interactiveVideo.js',
+                    '<%= yeoman.dist %>/scripts/classes/bb.class.mobileCoverSlide.js' : '<%= yeoman.app %>/scripts/classes/bb.class.mobileCoverSlide.js',
+                    '<%= yeoman.dist %>/scripts/classes/bb.class.siteCarousel.js' : '<%= yeoman.app %>/scripts/classes/bb.class.siteCarousel.js'
+                }
+            }
+        },
+        clean: {
+            dist: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= yeoman.dist %>/*',
+                        '!<%= yeoman.dist %>/.git*'
+                    ]
+                }]
+            },
+            server: '.tmp'
+        },
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            all: [
+                'Gruntfile.js',
+                '<%= yeoman.app %>/scripts/{,*/}*.js',
+                '!<%= yeoman.app %>/scripts/vendor/*',
+                'test/spec/{,*/}*.js'
+            ]
+        },
+        mocha: {
+            all: {
+                options: {
+                    run: true,
+                    urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html']
+                }
+            }
+        },
+        compass: {
+            options: {
+                sassDir: '<%= yeoman.app %>/sass',
+                cssDir: '<%= yeoman.app %>/styles',
+                outputStyle: 'compressed',
+                generatedImagesDir: '.tmp/images/generated',
+                imagesDir: '<%= yeoman.app %>/images',
+                javascriptsDir: '<%= yeoman.app %>/scripts',
+                fontsDir: '<%= yeoman.app %>/styles/fonts',
+                importPath: '<%= yeoman.app %>/bower_components',
+                httpImagesPath: '/images',
+                httpGeneratedImagesPath: '/images/generated',
+                httpFontsPath: '/styles/fonts',
+                relativeAssets: false,
+                assetCacheBuster: false
+            },
+            dist: {
+                options: {
+                    generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+                }
+            },
+            server: {
+                options: {
+                    debugInfo: false
+                }
+            },
+            partials: {
+                options: {
+                    sassDir: '<%= yeoman.app %>/partials/sass',
+                    cssDir: '<%= yeoman.app %>/partials'
+                }
+            },
+            forcepartials: {
+                options: {
+                    watch : false,
+                    sassDir: '<%= yeoman.app %>/partials/sass',
+                    cssDir: '<%= yeoman.app %>/partials'
+                }
+            },
+            force: {
+                options: {
+                    watch : false
+                }
+            }
+        },
+        autoprefixer: {
+            options: {
+                browsers: ['last 1 version']
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '/styles/',
+                    src: '{,*/}*.css',
+                    dest: 'styles/'
+                }]
+            }
+        },
+        concat: {
+            options: {
+                separator: ';\n'
+            },
+            server: {
+                files: {
+                    '.tmp/scripts/shims.min.js' : ['<%= yeoman.app %>/scripts/utility/*.js'],
+                    '<%= yeoman.app %>/scripts/shims.min.js' : ['<%= yeoman.app %>/scripts/utility/*.js'],
+                    '.tmp/scripts/vendors.min.js' : ['<%= yeoman.app %>/scripts/vendor/*.js'],
+                    '<%= yeoman.app %>/scripts/vendors.min.js' : ['<%= yeoman.app %>/scripts/vendor/*.js']
+                }
+            }
+        },
+        requirejs: {
+            dist: {
+                // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+                options: {
+                    // `name` and `out` is set by grunt-usemin
+                    baseUrl: '<%= yeoman.app %>/scripts',
+                    optimize: 'none',
+                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
+                    // https://github.com/yeoman/grunt-usemin/issues/30
+                    //generateSourceMaps: true,
+                    // required to support SourceMaps
+                    // http://requirejs.org/docs/errors.html#sourcemapcomments
+                    preserveLicenseComments: false,
+                    useStrict: true,
+                    wrap: true
+                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
+                }
+            }
+        },
+        rev: {
+            dist: {
+                files: {
+                    src: [
+                        '<%= yeoman.dist %>/scripts/{,*/}*.js',
+                        '<%= yeoman.dist %>/styles/{,*/}*.css',
+                        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+                        '<%= yeoman.dist %>/styles/fonts/{,*/}*.*'
+                    ]
+                }
+            }
+        },
+        useminPrepare: {
+            options: {
+                dest: '<%= yeoman.dist %>'
+            },
+            html: '<%= yeoman.app %>/index.html'
+        },
+        usemin: {
+            options: {
+                dirs: ['<%= yeoman.dist %>']
+            },
+            html: ['<%= yeoman.dist %>/{,*/}*.html'],
+            css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
+        },
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/images',
+                    src: '{,*/}*.{png,jpg,jpeg}',
+                    dest: '<%= yeoman.dist %>/images'
+                }]
+            }
+        },
+        svgmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/images',
+                    src: '{,*/}*.svg',
+                    dest: '<%= yeoman.dist %>/images'
+                }]
+            }
+        },
+        htmlmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>',
+                    src: '*.html',
+                    dest: '<%= yeoman.dist %>'
+                }]
+            }
+        },
+        // Put files not handled in other tasks here
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                        '*.{ico,png,txt,html,xml}',
+                        '.htaccess',
+                        'images/{,*/}*.*',
+                        'styles/fonts/{,*/}*.*',
+                        'bower_components/jquery/jquery.min.js',
+                        'images/{,*/}{,*/}{,*/}*.*',
+                        'scripts/*.json',
+                        'styles/*.*',
+                        'partials/*/*.*',
+                        'partials/*.{css,html}',
+                        'snapshots/*.*',
+                        'audio/*.*',
+                        'video/bg/{,*/}*.*',
+                        'video/interactive/{,*/}*.*'
+                    ]
+                }]
+            },
+            styles: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.app %>/styles',
+                dest: '.tmp/styles/',
+                src: '{,*/}*.css'
+            }
+        },
+        modernizr: {
+            devFile: '<%= yeoman.app %>/bower_components/modernizr/modernizr.js',
+            outputFile: '<%= yeoman.dist %>/bower_components/modernizr/modernizr.js',
+            files: [
+                '<%= yeoman.dist %>/scripts/{,*/}*.js',
+                '<%= yeoman.dist %>/styles/{,*/}*.css',
+                '!<%= yeoman.dist %>/scripts/vendor/*'
+            ],
+            uglify: true
+        },
+        concurrent: {
+            server: [
+                'compass',
+                'copy:styles'
+            ],
+            test: [
+                'copy:styles'
+            ],
+            dist: [
+                'compass',
+                'copy:styles',
+                'htmlmin'
+            ]
+        },
+        bower: {
+            options: {
+                exclude: ['modernizr']
+            },
+            all: {
+                rjsConfig: '<%= yeoman.app %>/scripts/main.js'
+            }
+        }
+    });
+
+    grunt.registerTask('server', function (target) {
+        if (target === 'dist') {
+            return grunt.task.run(['build', 'connect:dist:keepalive']);
+        }
+
+        grunt.task.run([
+            'clean:server',
+            'concurrent:server',
+            'concat:server',
+            'compass:force',
+            'compass:forcepartials',
+            'autoprefixer',
+            'connect:livereload',
+            'watch'
+        ]);
+    });
+
+    grunt.registerTask('test', [
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'connect:test',
+        'mocha'
+    ]);
+
+    grunt.registerTask('build', [
+        'clean:dist',
+        'concurrent:dist',
+        'uglify:dist',
+        'autoprefixer',
+        'copy:dist'
+    ]);
+
+    grunt.registerTask('default', ['build']);
+};
+              </code>
+            </pre>
+          </div>
+        </section>
+
+        <section id="Brunch-intro" class="slide08" data-transition="fade-in slide-out">
+          <img src="images/brunch_logo.png">
+          <h2>Central Philosophy:</h2>
+          <h2>Convention Over Configuration</h2>
+        </section>
+
+        <section id="Brunch-strengths" class="slide09" data-transition="slide">
+          <h2>Brunch Pros:</h2>
+          <div class="list">
+            <ul>
+              <li>Convention Over Configuration</li>
+              <li class="fragment">Tiny Configuration Files</li>
+              <li class="fragment">Module Bundling and Bundle Splitting</li>
+              <li class="fragment">Plugins Are Mostly Plug-And-Play</li>
+              <li class="fragment">Lightning Fast Watch Process</li>
+              <li class="fragment">Fastest Up-And-Running</li>
+              <li class="fragment">Works As If By Magic</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Brunch-weaknesses" class="slide10" data-transition="slide">
+          <h2>Brunch Cons:</h2>
+          <div class="list">
+            <ul>
+              <li>Works As If By Magic</li>
+              <li class="fragment">Not Ideal For Large, Complex Processes</li>
+              <li class="fragment">Smallest Community</li>
+              <li class="fragment">Only ~300 Plugins</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Brunch-sampleconfig" class="slide11" data-transition="slide-in fade-out">
+          <h2>Sample Brunch Config:</h2>
+          <div class="codeblock02">
+            <pre>
+              <code class="line-numbers" data-trim>
+exports.config =
+  files:
+    javascripts:
+      joinTo:
+        'javascripts/app.js': /^(app)/
+        'javascripts/vendor.js': /^(?!app)/
+    stylesheets:
+      joinTo: 'stylesheets/app.css'
+              </code>
+            </pre>
+          </div>
+        </section>
+
+        <section id="Gulp-intro" class="slide12" data-transition="fade-in slide-out">
+          <img src="images/gulp_logo.png">
+          <h2>Central Philosophy:</h2>
+          <h2>Code Over Configuration</h2>
+        </section>
+
+        <section id="Gulp-strengths" class="slide13" data-transition="slide">
+          <h2>Gulp Pros:</h2>
+          <div class="list">
+            <ul>
+              <li>Chain Tasks Together Using Streams</li>
+              <li class="fragment">Comprehensible Configuration Files</li>
+              <li class="fragment">Thousands of Plugins</li>
+              <li class="fragment">Lightning Fast Watch Process</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Gulp-weaknesses" class="slide14" data-transition="slide">
+          <h2>Gulp Cons:</h2>
+          <div class="list">
+            <ul>
+              <li>Limitations Are Unintuitive</li>
+              <li class="fragment">Overly Complex For Small To Mid-Sized Builds</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="Gulp-sampleconfig" class="slide15" data-transition="slide-in convex-out">
+          <h2>Sample GulpFile:</h2>
+          <div class="codeblock03">
+            <pre>
+              <code class="line-numbers" data-trim>
+var gulp = require('gulp');
+var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
+var less = require('gulp-less');
+var refresh = require('gulp-livereload');
+var lr = require('tiny-lr');
+var server = lr();
+var minifyCSS = require('gulp-minify-css');
+var embedlr = require('gulp-embedlr');
+
+gulp.task('scripts', function() {
+    gulp.src(['app/src/**/*.js'])
+        .pipe(browserify())
+        .pipe(concat('dest.js'))
+        .pipe(gulp.dest('dist/build'))
+        .pipe(refresh(server))
+})
+
+gulp.task('styles', function() {
+    gulp.src(['app/css/style.less'])
+        .pipe(less())
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('dist/build'))
+        .pipe(refresh(server))
+})
+
+gulp.task('lr-server', function() {
+    server.listen(35729, function(err) {
+        if(err) return console.log(err);
+    });
+})
+
+gulp.task('html', function() {
+    gulp.src("app/*.html")
+        .pipe(embedlr())
+        .pipe(gulp.dest('dist/'))
+        .pipe(refresh(server));
+})
+
+gulp.task('default', function() {
+    gulp.run('lr-server', 'scripts', 'styles', 'html');
+
+    gulp.watch('app/src/**', function(event) {
+        gulp.run('scripts');
+    })
+
+    gulp.watch('app/css/**', function(event) {
+        gulp.run('styles');
+    })
+
+    gulp.watch('app/**/*.html', function(event) {
+        gulp.run('html');
+    })
+})
+              </code>
+            </pre>
+          </div>
+        </section>
+
+        <section id="Conclusion" class="slide16">
+          <div class="row">
+            <img src="images/grunt_logo.png">
+            <img src="images/brunch_logo.png">
+            <img src="images/gulp_logo.png">
+          </div>
+        </section>
+
+        <section id="Sources" class="slide17">
+          <h2>Sources:</h2>
+          <div class="list">
+            <ul>
+              
+              <li>
+                <h4>Grunt</h4>
+                <ul>
+                  <li>website: <a href="http://gruntjs.com" target="_blank">http://gruntjs.com</a></li>
+                  <li>github: <a href="https://github.com/gruntjs/grunt" target="_blank">https://github.com/gruntjs/grunt</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <h4>Brunch</h4>
+                <ul>
+                  <li>website: <a href="http://brunch.io/" target="_blank">http://brunch.io/</a></li>
+                  <li>github: <a href="https://github.com/brunch/brunch" target="_blank">https://github.com/brunch/brunch</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <h4>Gulp</h4>
+                <ul>
+                  <li>website: <a href="http://gulpjs.com/" target="_blank">http://gulpjs.com/</a></li>
+                  <li>github: <a href="https://github.com/gulpjs/gulp" target="_blank">https://github.com/gulpjs/gulp</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <h4>What are the best node.js build systems / task runners?</h4>
+                <ul>
+                  <li>slant.co: <a href="http://www.slant.co/topics/1276/~node-js-build-systems-task-runners" target="_blank">http://www.slant.co/topics/1276/~node-js-build-systems-task-runners</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <h4>Grunt vs Gulp vs Brunch</h4>
+                <ul>
+                  <li>toggl.com: <a href="https://blog.toggl.com/2014/03/grunt-vs-gulp-vs-brunch/" target="_blank">https://blog.toggl.com/2014/03/grunt-vs-gulp-vs-brunch/</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </div>
+        </section>
+
+        <section id="About" class="slide18">
+          <h2>Chi-chi Wang</h2>
+          <h4><a href="http://www.mrchichiwang.com" target="_blank">mrchichiwang.com</a></h4>
+          <h4><a href="https://github.com/chichiwang">https://github.com/chichiwang</a></h4>
+          <h4>@mrchichiwang</h4>
+        </section>
+
+      </div>
+    </div>
+
+    <script type="text/javascript" src="javascripts/vendor.js"></script>
+    <script type="text/javascript" src="javascripts/app.js"></script>
+    <script type="text/javascript">require('javascripts/app');</script>
+  </body>
+</html>

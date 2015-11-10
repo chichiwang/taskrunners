@@ -1,0 +1,19 @@
+{
+  "name": "taskrunners",
+  "version": "0.0.0",
+  "description": "Presentation: Introduction to javascript task runners",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chi-chi Wang <chichi@wangchiyi.com>",
+  "license": "MIT",
+  "dependencies": {
+    "auto-reload-brunch": "^1.8.1",
+    "brunch": "^1.8.5",
+    "css-brunch": "^1.7.0",
+    "javascript-brunch": "^1.8.0",
+    "stylus-brunch": "^1.8.1",
+    "uglify-js-brunch": "^1.7.8"
+  }
+}

@@ -1,0 +1,12 @@
+[X] Add sample config files
+[X] Add scroll to next/prev controls on sample config files
+[X] Disable on-screen controls
+[X] Write a references section at the end
+[X] Put up contact info (twitter, github, email)
+
+---
+
+[ ] Host slides on Github
+[ ] Put static resume up at mrchichiwang.com
+[ ] Host slides on presentations.mrchichiwang.com/taskrunners
+[ ] Practice. Practice. Practice.

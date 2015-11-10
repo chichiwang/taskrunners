@@ -1,0 +1,87 @@
+What is a task runner/build system?
+---
+Tool to automate repetitive tasks
+
+Value proposition of a task runner
+---
+spriting
+image compression
+compiling
+prefixing
+linting
+running tests
+concatenating
+module bundling
+watching
+minifying
+building for production
+
+Many compile tools include a watcher utility (Coffeescript, Sass)
+
+Most popular task runners
+---
+Grunt
+Gulp
+NPM
+Brunch
+Broccoli
+
+Grunt - The Bent Bullet
+---
+Task runner that started taking off in 2013
+Large community contributing thousands of plugins (over 4k to date)
+Extremely configurable.
+Tasks can be built into plugins and shared with the community
+
+Large and bloated configurations
+  - Possible solutions: plugins that manage config, scaffolding tool like Yeoman to provide boilerplate config
+You will be reading and/or writing a LOT of configuration
+Mid-sized to large-sized builds will take seconds (for larger builds 7-10+ seconds) to rebuild
+  - This is a result of running tasks on every file even when only one has changed
+  - When you are saving and using a watch task, this can start to feel very slow
+  - Alleviated by plugins to run tasks concurrently
+
+Brunch - X-Men Movies
+---
+Task runner appears in 2011, never gained popularity the way Grunt and Gulp did
+
+Get up running quickly and gets out of your way
+Convention over configuration
+Module bundling out of the box
+Smallest configuration files
+  - Get started with less than 9 lines of configuration
+  - You don't need to write config if you use a skeleton (scaffold)
+Configurable
+
+Works as if magic
+  - Custom configurations may be harder to stumle on
+Smallest community of plugins
+  - Only ~300 plugins
+
+What is Gulp?
+---
+Task runner gained steam in 2014 as a competitor to Grunt
+Using a streaming build system using Node pipes (are a lot like Unix pipes)
+  - pipe one task into another
+Excellent performance
+  - operations are run in memory instead of I/O like Grunt
+    - stores transformations in memory and only writes to disk at the end of the task chain
+  - doesn't unnecessarily compile files
+  - Runs tasks concurrently if they do not have dependencies
+Smaller configuration files than grunt
+  - Emphasizes code over configuration (the configuration is written like code) making it easier for developers unfamiliar with the system to understand what's happen (uses Node stream conventions)
+  - Because of that tasks can be broken out into module files and configurations can become structured
+Configurations are more legible than grunt
+Thousands of plugins
+
+Limitations are not intuitive
+  - Conventions and methods that are not clear
+Overly complex for small to mid-size projects
+  - You will still be writing quite a bit of code to get your task runner set up
+
+I have since looked into and tried gulp, and I believe there is value in it. It's great for running robust bundlers like Webpack, configuring complex chains of tasks, and runs them well. Configuration can be broken up into multiple files.
+
+Conclusion
+---
+Every task runner has its place
+Learn them all, 

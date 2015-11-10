@@ -1,0 +1,137 @@
+@import 'nib'
+
+.reveal
+  section img
+    border: 0
+    vertical-align: middle
+    background: transparent
+    box-shadow: none
+    
+  pre
+    margin: 0 auto
+    box-shadow: none
+    code
+      padding-left: 1em
+      max-height: 600px
+
+  h1, h2, h3, h4, h5,
+  p,
+  ul, ul li
+    color: #1E4C5E
+
+  h1, h2, h3, h4, h5
+    color: #1E4C5E
+    text-transform: none
+
+  p
+    color: #1E4C5E
+    font-size: 1em
+    
+  .slide-background.present,
+  .slide-background.past,
+  .slide-background.future
+        background: linear-gradient(180deg, #9AC2D1, #ffffff 25%, #ffffff) !important
+        background-image: url('../images/dark-dotted-2.png'), linear-gradient(180deg, #9AC2D1, #ffffff 25%, #ffffff) !important
+    
+  .slide01
+      .row
+        margin-top: 2em
+        
+      img
+        height: 200px
+        margin-right: 2em
+        &:last-of-type
+          margin-right: 0
+  
+  .slide02
+    .list
+      text-align: left
+      
+      overflow: hidden
+      transform-origin: left center
+      transform: rotateY(125deg)
+      transition-delay: 0.2s
+      transition-duration: 0.45s
+      
+      ul li
+        opacity: 0.0
+        transition-property: all
+        transition-duration: 0.2s
+        transition-timing-function: ease
+
+      for num in (1..10)
+        $n = num
+        ul li:nth-child({$n})
+          transition-delay: (50ms * $n) + 200ms
+            
+    &.present .list
+      transform: rotateY(0deg)
+      
+      ul li
+        opacity: 1.0
+      
+  .slide03
+    .row
+      margin-top: 2em
+      
+      img
+        height: 350px
+        opacity: 0
+        transition-property: all
+        transition-duration: 0.4s
+        transition-timing-function: ease
+        
+      for num in (0..9)
+        $n = num
+        img:nth-child({$n+1})
+          transition-delay: 0.3s * $n
+      
+      &.visible
+        img
+          opacity: 1
+  
+  .slide04,
+  .slide08,
+  .slide12
+    img
+      height: 450px
+    h2
+      margin-bottom: 0
+      
+      &:first-of-type
+        margin-top: 1em
+        
+  .slide16
+    .row img
+      height: 350px
+      
+  .slide17
+    top: -1em !important
+    
+    h2
+      font-size: 1.4em
+
+    .list > ul > li
+      list-style-type: none
+      margin-bottom: 0.75em
+      
+      h1, h2, h3, h4, h5
+        margin: 0
+        font-size: 0.85em
+      
+      & > ul > li
+        list-style-type: none
+        font-size: 0.8em
+  
+  .slide18
+    h4
+      margin-bottom: 0.5em
+      
+      &:first-of-type
+        margin-top: 1.5em
+  
+  .slide07,
+  .slide11,
+  .slide15
+    h2
+      margin: 0

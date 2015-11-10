@@ -1,0 +1,27 @@
+{
+  "name": "taskrunners",
+  "description": "Presentation: Introduction to javascript task runners",
+  "main": "app.js",
+  "authors": [
+    "Chi-chi Wang <chichi@wangchiyi.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "reveal.js": "~3.1.0",
+    "normalize-css": "~3.0.3"
+  },
+  "overrides": {
+    "reveal.js": {
+      "main": [
+        "js/reveal.js",
+        "plugin/highlight/highlight.js",
+        "css/reveal.css",
+        "css/theme/white.css",
+        "lib/css/zenburn.css"
+      ]
+    }
+  }
+}
